@@ -12,19 +12,43 @@ Premium, open-source UI ecosystem for modern web development. Built for Next.js 
 - **AI UI Generator** — Prompt-to-UI engine that crafts React, Tailwind, HTML, Vue, and Svelte code on demand.
 - **Developer Tools** — Color palette generator, gradient generator, shadow generator, border-radius playground, animation playground, and code playground.
 
-## Quick Start
+## Installation
+
+Add ForgeUI to your existing project:
 
 ```bash
-npx forgeui init
+npm install @forgeui/react
+# or
+yarn add @forgeui/react
+# or
+pnpm add @forgeui/react
 ```
 
-Then run the development server:
+## Usage
+
+```tsx
+import { Button, Card, Badge } from "@forgeui/react";
+
+export default function Dashboard() {
+  return (
+    <Card className="p-6">
+      <Badge variant="purple">Revenue</Badge>
+      <h2 className="text-3xl font-bold">$48,200</h2>
+      <Button>Deploy Now</Button>
+    </Card>
+  );
+}
+```
+
+## CLI
+
+Install individual components without bloating your bundle:
 
 ```bash
-npm run dev
+npx forgeui add button
+npx forgeui add card
+npx forgeui add modal
 ```
-
-Open [http://localhost:3000](http://localhost:3000) to see your site.
 
 ## Tech Stack
 
