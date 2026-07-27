@@ -1,0 +1,133 @@
+export interface TemplateItem {
+  slug: string;
+  name: string;
+  category: string;
+  description: string;
+  tags: string[];
+  installCmd: string;
+  previewGradient: string;
+  features: string[];
+}
+
+export const TEMPLATES: TemplateItem[] = [
+  {
+    slug: "saas",
+    name: "SaaS Platform Landing",
+    category: "Landing Page",
+    description: "High-converting SaaS landing page with hero illustration, feature grid, interactive pricing, and testimonials.",
+    tags: ["Next.js 15", "Tailwind v4", "Framer Motion"],
+    installCmd: "npx forgeui template add saas",
+    previewGradient: "from-purple-900 via-gray-900 to-cyan-900",
+    features: ["Hero with video modal", "Interactive pricing toggle", "Logo ticker", "FAQ Accordion"],
+  },
+  {
+    slug: "ai-startup",
+    name: "AI Startup Launchpad",
+    category: "AI & Tech",
+    description: "Futuristic dark-themed landing page designed for AI tools, LLM wrappers, and automated agent startups.",
+    tags: ["AI Tools", "Glassmorphism", "Lucide Icons"],
+    installCmd: "npx forgeui template add ai-startup",
+    previewGradient: "from-cyan-950 via-purple-950 to-gray-950",
+    features: ["Prompt input demo", "Live code snippet runner", "Feature highlight tabs", "Waitlist form"],
+  },
+  {
+    slug: "dashboard",
+    name: "Analytics & Admin Dashboard",
+    category: "Dashboard",
+    description: "Comprehensive admin portal featuring analytics charts, user management table, sales metrics, and sidebar navigation.",
+    tags: ["Admin", "Charts", "Tables"],
+    installCmd: "npx forgeui template add dashboard",
+    previewGradient: "from-gray-900 via-purple-950 to-gray-900",
+    features: ["Revenue metric cards", "Data grid with sorting", "Activity feed", "Collapsible sidebar"],
+  },
+  {
+    slug: "portfolio",
+    name: "Developer Portfolio",
+    category: "Personal",
+    description: "Minimalist developer portfolio with animated project showcase, skill badges, experience timeline, and contact form.",
+    tags: ["Portfolio", "Timeline", "Contact Form"],
+    installCmd: "npx forgeui template add portfolio",
+    previewGradient: "from-purple-950 via-gray-900 to-indigo-950",
+    features: ["Interactive project cards", "Work experience timeline", "Github activity widget", "Resume downloader"],
+  },
+  {
+    slug: "ecommerce",
+    name: "Modern E-Commerce Store",
+    category: "Commerce",
+    description: "Sleek product catalog, filterable category sidebar, shopping cart drawer, and checkout flow interface.",
+    tags: ["E-Commerce", "Cart Drawer", "Checkout"],
+    installCmd: "npx forgeui template add ecommerce",
+    previewGradient: "from-fuchsia-950 via-gray-900 to-purple-950",
+    features: ["Product quick view modal", "Variant selector", "Rating breakdown", "Cart drawer"],
+  },
+  {
+    slug: "agency",
+    name: "Digital Creative Agency",
+    category: "Agency",
+    description: "Bold, modern agency template with parallax project cases, team grid, client logo marquee, and inquiry form.",
+    tags: ["Agency", "Parallax", "Case Studies"],
+    installCmd: "npx forgeui template add agency",
+    previewGradient: "from-amber-950 via-gray-900 to-purple-950",
+    features: ["Fullscreen case study modal", "Team bio grid", "Interactive services stack"],
+  },
+  {
+    slug: "blog",
+    name: "MDX Tech Blog",
+    category: "Content",
+    description: "Clean, readable developer blog layout with article cards, category tags, author avatars, and reading time indicator.",
+    tags: ["MDX", "Blog", "SEO"],
+    installCmd: "npx forgeui template add blog",
+    previewGradient: "from-gray-900 via-blue-950 to-gray-950",
+    features: ["Category filter pills", "Author bio card", "Related articles carousel", "Newsletter box"],
+  },
+  {
+    slug: "startup",
+    name: "Early-Stage Waitlist Page",
+    category: "Landing Page",
+    description: "High-impact single-page waitlist page with email submission box, viral referral link modal, and feature teaser cards.",
+    tags: ["Waitlist", "Referrals", "Micro-animations"],
+    installCmd: "npx forgeui template add startup",
+    previewGradient: "from-emerald-950 via-gray-900 to-purple-950",
+    features: ["Email signup box", "Count counter", "Viral share buttons"],
+  },
+  {
+    slug: "restaurant",
+    name: "Fine Dining Restaurant",
+    category: "Hospitality",
+    description: "Elegant restaurant menu listing, reservation request form, chef stories, and photo gallery grid.",
+    tags: ["Menu", "Reservations", "Gallery"],
+    installCmd: "npx forgeui template add restaurant",
+    previewGradient: "from-amber-950 via-gray-900 to-red-950",
+    features: ["Categorized food menu", "Reservation picker", "Photo lightbox"],
+  },
+  {
+    slug: "medical",
+    name: "Healthcare & Clinic Portal",
+    category: "Medical",
+    description: "Trustworthy medical practice site with doctor search, appointment scheduler modal, and patient portal login UI.",
+    tags: ["Medical", "Appointments", "Portal"],
+    installCmd: "npx forgeui template add medical",
+    previewGradient: "from-cyan-950 via-gray-900 to-blue-950",
+    features: ["Doctor department cards", "Booking calendar modal", "Patient reviews"],
+  },
+  {
+    slug: "education",
+    name: "Online Academy & Courses",
+    category: "Education",
+    description: "LMS platform landing with course cards, instructor bios, curriculum breakdown accordion, and student reviews.",
+    tags: ["Courses", "LMS", "Accordion"],
+    installCmd: "npx forgeui template add education",
+    previewGradient: "from-purple-950 via-gray-900 to-fuchsia-950",
+    features: ["Course syllabus accordion", "Video preview modal", "Enrollment CTA"],
+  },
+  {
+    slug: "travel",
+    name: "Travel & Destination Guide",
+    category: "Travel",
+    description: "Vibrant travel booking landing page featuring destination cards, itinerary planner, and package pricing.",
+    tags: ["Travel", "Cards", "Itinerary"],
+    installCmd: "npx forgeui template add travel",
+    previewGradient: "from-blue-950 via-gray-900 to-cyan-950",
+    features: ["Interactive destination filter", "Itinerary timeline", "Booking inquiry modal"],
+  },
+];
