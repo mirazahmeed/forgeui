@@ -7,7 +7,7 @@ export interface TableColumn<T> {
   render?: (row: T) => React.ReactNode;
 }
 
-export function DataTable<T extends Record<string, any>>({
+export function DataTable<T extends Record<string, unknown>>({
   columns,
   data,
   className,
@@ -31,7 +31,7 @@ export function DataTable<T extends Record<string, any>>({
             <tr key={idx} className="hover:bg-gray-850/50 transition-colors">
               {columns.map((col) => (
                 <td key={col.key} className="py-3 px-4 text-gray-300">
-                  {col.render ? col.render(row) : row[col.key]}
+                  {col.render ? col.render(row) : (row[col.key] as React.ReactNode)}
                 </td>
               ))}
             </tr>

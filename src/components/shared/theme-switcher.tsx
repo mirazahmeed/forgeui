@@ -6,11 +6,11 @@ import { Sun, Moon, Laptop } from "lucide-react";
 
 export function ThemeSwitcher() {
   const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = React.useState(false);
-
-  React.useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = React.useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  );
 
   if (!mounted) {
     return <div className="w-24 h-8 rounded-xl bg-gray-200 dark:bg-gray-800/50 animate-pulse" />;
