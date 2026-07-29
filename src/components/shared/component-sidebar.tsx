@@ -181,7 +181,7 @@ export function ComponentSidebar() {
 
   return (
     <aside className="w-full lg:w-56 shrink-0 space-y-6 lg:sticky lg:top-20 lg:max-h-[calc(100vh-6rem)] lg:overflow-y-auto pr-3 py-2 select-none font-sans">
-      <div className="px-3 text-xs font-bold text-gray-500 uppercase tracking-wider pb-2 border-b border-gray-800/80">
+      <div className="px-3 text-xs font-bold text-gray-500 uppercase tracking-wider pb-2 border-b border-gray-200 dark:border-gray-800/80">
         Components
       </div>
 
@@ -196,8 +196,8 @@ export function ComponentSidebar() {
         const CategoryIcon = group.icon;
         return (
           <div key={group.title} className="space-y-1.5">
-            <div className="flex items-center gap-2 px-3 py-1 text-xs font-semibold text-gray-400">
-              <CategoryIcon className="w-3.5 h-3.5 text-gray-500 shrink-0" />
+            <div className="flex items-center gap-2 px-3 py-1 text-xs font-semibold text-gray-500 dark:text-gray-400">
+              <CategoryIcon className="w-3.5 h-3.5 text-gray-400 dark:text-gray-500 shrink-0" />
               <span>{group.title}</span>
             </div>
 
@@ -217,13 +217,18 @@ export function ComponentSidebar() {
                     className={cn(
                       "flex items-center justify-between px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-150 cursor-pointer",
                       isActive
-                        ? "bg-black text-white font-bold shadow-md ring-1 ring-gray-800"
-                        : "text-gray-400 hover:text-gray-200 hover:bg-gray-900/60"
+                        ? "bg-purple-600 text-white font-bold shadow-md dark:bg-purple-950/80 dark:text-purple-300 dark:ring-1 dark:ring-purple-800/50"
+                        : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-900/60"
                     )}
                   >
                     <span>{label}</span>
                     {badge && (
-                      <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-gray-800 text-gray-400 font-normal">
+                      <span className={cn(
+                        "text-[9px] font-mono px-1.5 py-0.5 rounded font-normal",
+                        isActive
+                          ? "bg-purple-700 dark:bg-purple-900 text-purple-100"
+                          : "bg-gray-200 dark:bg-gray-800 text-gray-600 dark:text-gray-400"
+                      )}>
                         {badge}
                       </span>
                     )}

@@ -37,20 +37,20 @@ export function Navbar() {
 
   return (
     <>
-      <header className="sticky top-0 z-40 w-full border-b border-gray-800/80 bg-gray-950/80 backdrop-blur-xl transition-all">
+      <header className="sticky top-0 z-40 w-full border-b border-gray-200/80 dark:border-gray-800/80 bg-white/80 dark:bg-gray-950/80 backdrop-blur-xl transition-all">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 via-fuchsia-500 to-cyan-400 p-[1px] shadow-lg shadow-purple-900/30 group-hover:shadow-purple-600/40 transition-all">
-              <div className="w-full h-full bg-gray-950 rounded-[11px] flex items-center justify-center">
-                <Sparkles className="w-5 h-5 text-purple-400 group-hover:scale-110 transition-transform" />
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 via-fuchsia-500 to-cyan-400 p-[1px] shadow-lg shadow-purple-900/20 dark:shadow-purple-900/30 group-hover:shadow-purple-600/40 transition-all">
+              <div className="w-full h-full bg-white dark:bg-gray-950 rounded-[11px] flex items-center justify-center">
+                <Sparkles className="w-5 h-5 text-purple-600 dark:text-purple-400 group-hover:scale-110 transition-transform" />
               </div>
             </div>
             <div className="flex flex-col">
-              <span className="text-xl font-bold tracking-tight text-white flex items-center gap-1.5">
-                Forge<span className="text-purple-400">UI</span>
+              <span className="text-xl font-bold tracking-tight text-gray-900 dark:text-white flex items-center gap-1.5">
+                Forge<span className="text-purple-600 dark:text-purple-400">UI</span>
               </span>
-              <span className="text-[10px] text-gray-400 font-mono tracking-wider">PREMIUM ECOSYSTEM</span>
+              <span className="text-[10px] text-gray-500 dark:text-gray-400 font-mono tracking-wider">PREMIUM ECOSYSTEM</span>
             </div>
           </Link>
 
@@ -65,8 +65,8 @@ export function Navbar() {
                   href={link.href}
                   className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all flex items-center gap-1.5 relative ${
                     isActive
-                      ? "text-purple-300 bg-purple-950/50 border border-purple-800/40"
-                      : "text-gray-300 hover:text-white hover:bg-gray-800/40"
+                      ? "text-purple-700 bg-purple-50 border border-purple-200 dark:text-purple-300 dark:bg-purple-950/50 dark:border-purple-800/40"
+                      : "text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800/40"
                   }`}
                 >
                   <Icon className="w-4 h-4 opacity-70" />
@@ -86,11 +86,11 @@ export function Navbar() {
             {/* Search Trigger */}
             <button
               onClick={() => setCommandOpen(true)}
-              className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-gray-900 border border-gray-800 text-gray-400 text-xs hover:border-gray-700 hover:text-gray-200 transition-all shadow-inner cursor-pointer"
+              className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-gray-100 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 text-gray-500 dark:text-gray-400 text-xs hover:border-gray-300 dark:hover:border-gray-700 hover:text-gray-900 dark:hover:text-gray-200 transition-all shadow-inner cursor-pointer"
             >
-              <Command className="w-3.5 h-3.5 text-purple-400" />
+              <Command className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />
               <span>Quick Search...</span>
-              <kbd className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-800 rounded border border-gray-700 text-gray-400">
+              <kbd className="ml-2 px-1.5 py-0.5 text-[10px] bg-gray-200 dark:bg-gray-800 rounded border border-gray-300 dark:border-gray-700 text-gray-500 dark:text-gray-400">
                 ⌘K
               </kbd>
             </button>
@@ -103,11 +103,11 @@ export function Navbar() {
               href="https://github.com"
               target="_blank"
               rel="noreferrer"
-              className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-purple-950/40 border border-purple-800/40 text-purple-200 text-xs hover:bg-purple-900/40 transition-all font-medium"
+              className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-purple-50 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-800/40 text-purple-700 dark:text-purple-200 text-xs hover:bg-purple-100 dark:hover:bg-purple-900/40 transition-all font-medium"
             >
-              <GithubIcon className="w-4 h-4 text-purple-400" />
+              <GithubIcon className="w-4 h-4 text-purple-600 dark:text-purple-400" />
               <span>GitHub</span>
-              <span className="px-1.5 py-0.5 bg-purple-900/60 rounded text-[10px] text-purple-300 font-mono">
+              <span className="px-1.5 py-0.5 bg-purple-200 dark:bg-purple-900/60 rounded text-[10px] text-purple-800 dark:text-purple-300 font-mono">
                 ★ 12.4k
               </span>
             </a>
@@ -115,7 +115,7 @@ export function Navbar() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(true)}
-              className="lg:hidden p-2 rounded-xl bg-gray-900 border border-gray-800 text-gray-300 hover:text-white"
+              className="lg:hidden p-2 rounded-xl bg-gray-100 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
             >
               <Menu className="w-5 h-5" />
             </button>

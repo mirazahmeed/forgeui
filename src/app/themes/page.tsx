@@ -16,18 +16,18 @@ export default function ThemesPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-950 text-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-slate-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 py-12 px-4 sm:px-6 lg:px-8 transition-colors">
       <div className="max-w-7xl mx-auto space-y-12">
         {/* Header */}
-        <div className="space-y-4 text-center border-b border-gray-800 pb-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-950/60 border border-purple-800/50 text-purple-300 text-xs font-semibold">
+        <div className="space-y-4 text-center border-b border-gray-200 dark:border-gray-800 pb-10">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-100 dark:bg-purple-950/60 border border-purple-300 dark:border-purple-800/50 text-purple-700 dark:text-purple-300 text-xs font-semibold">
             <Palette className="w-3.5 h-3.5" />
             <span>10 Preset Themes + Live CSS Export</span>
           </div>
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-white font-heading">
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 dark:text-white font-heading">
             Theme <span className="text-gradient">Engine</span>
           </h1>
-          <p className="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto">
+          <p className="text-gray-600 dark:text-gray-400 text-sm sm:text-base max-w-2xl mx-auto">
             Switch between curated color palettes or export custom CSS variables directly to your `globals.css`.
           </p>
         </div>
@@ -39,21 +39,28 @@ export default function ThemesPage() {
             return (
               <button
                 key={theme.id}
-                onClick={() => setActiveTheme(theme)}
+                onClick={() => {
+                  setActiveTheme(theme);
+                  if (typeof document !== "undefined") {
+                    document.documentElement.style.setProperty("--primary", theme.primary);
+                    document.documentElement.style.setProperty("--secondary", theme.secondary);
+                    document.documentElement.style.setProperty("--accent", theme.accent);
+                  }
+                }}
                 className={`p-4 rounded-2xl border text-left transition-all cursor-pointer space-y-3 ${
                   isSelected
-                    ? "bg-gray-900 border-purple-500 shadow-xl glow-purple ring-2 ring-purple-500/40"
-                    : "bg-gray-900/60 border-gray-800 hover:border-gray-700"
+                    ? "bg-white dark:bg-gray-900 border-purple-500 shadow-xl glow-purple ring-2 ring-purple-500/40"
+                    : "bg-white/80 dark:bg-gray-900/60 border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-700"
                 }`}
               >
                 <div className="flex items-center gap-1.5">
-                  <div className="w-4 h-4 rounded-full border border-white/20" style={{ backgroundColor: theme.primary }} />
-                  <div className="w-4 h-4 rounded-full border border-white/20" style={{ backgroundColor: theme.secondary }} />
-                  <div className="w-4 h-4 rounded-full border border-white/20" style={{ backgroundColor: theme.accent }} />
+                  <div className="w-4 h-4 rounded-full border border-white/20 shadow-sm" style={{ backgroundColor: theme.primary }} />
+                  <div className="w-4 h-4 rounded-full border border-white/20 shadow-sm" style={{ backgroundColor: theme.secondary }} />
+                  <div className="w-4 h-4 rounded-full border border-white/20 shadow-sm" style={{ backgroundColor: theme.accent }} />
                 </div>
                 <div>
-                  <div className="text-xs font-bold text-white">{theme.name}</div>
-                  <div className="text-[10px] text-gray-400 line-clamp-1">{theme.vibe}</div>
+                  <div className="text-xs font-bold text-gray-900 dark:text-white">{theme.name}</div>
+                  <div className="text-[10px] text-gray-500 dark:text-gray-400 line-clamp-1">{theme.vibe}</div>
                 </div>
               </button>
             );
@@ -61,14 +68,14 @@ export default function ThemesPage() {
         </div>
 
         {/* Live Theme Preview & Code Exporter Box */}
-        <div className="rounded-3xl border border-gray-800 bg-gray-900 shadow-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-2">
+        <div className="rounded-3xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-2">
           {/* Live Component Preview Panel */}
-          <div className="p-8 space-y-6 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-gray-800 bg-gray-950/60">
+          <div className="p-8 space-y-6 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-gray-200 dark:border-gray-800 bg-slate-50/60 dark:bg-gray-950/60">
             <div className="space-y-2">
-              <span className="text-[10px] font-mono font-bold text-purple-400 uppercase tracking-widest flex items-center gap-1">
+              <span className="text-[10px] font-mono font-bold text-purple-600 dark:text-purple-400 uppercase tracking-widest flex items-center gap-1">
                 <Eye className="w-3.5 h-3.5" /> Live Preview — {activeTheme.name}
               </span>
-              <h3 className="text-2xl font-bold text-white font-heading">
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white font-heading">
                 {activeTheme.vibe}
               </h3>
             </div>
@@ -105,10 +112,10 @@ export default function ThemesPage() {
           </div>
 
           {/* Code Exporter Panel */}
-          <div className="p-8 space-y-4 flex flex-col justify-between bg-gray-950">
+          <div className="p-8 space-y-4 flex flex-col justify-between bg-slate-100 dark:bg-gray-950">
             <div className="space-y-2">
               <div className="flex justify-between items-center">
-                <h4 className="text-sm font-bold text-white font-mono">CSS Variables Output</h4>
+                <h4 className="text-sm font-bold text-gray-900 dark:text-white font-mono">CSS Variables Output</h4>
                 <button
                   onClick={handleCopyCss}
                   className="px-3 py-1.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold flex items-center gap-1.5 cursor-pointer"
@@ -117,17 +124,17 @@ export default function ThemesPage() {
                   <span>{copied ? "Copied" : "Copy CSS"}</span>
                 </button>
               </div>
-              <p className="text-xs text-gray-400">
+              <p className="text-xs text-gray-600 dark:text-gray-400">
                 Paste these CSS custom properties directly into your project&apos;s root stylesheet.
               </p>
             </div>
 
-            <pre className="p-4 rounded-xl bg-gray-900 border border-gray-800 text-xs font-mono text-purple-300 overflow-x-auto">
+            <pre className="p-4 rounded-xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 text-xs font-mono text-purple-600 dark:text-purple-300 overflow-x-auto">
               <code>{activeTheme.cssVariables}</code>
             </pre>
 
             <div className="text-[11px] text-gray-500">
-              💡 Tip: You can also apply themes using the CLI: <span className="font-mono text-purple-400">npx forgeui theme {activeTheme.id}</span>
+              💡 Tip: You can also apply themes using the CLI: <span className="font-mono text-purple-600 dark:text-purple-400">npx forgeui theme {activeTheme.id}</span>
             </div>
           </div>
         </div>

@@ -55,8 +55,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${outfit.variable} h-full dark`}>
-      <body className="min-h-full flex flex-col bg-gray-950 text-gray-100 font-sans antialiased selection:bg-purple-600 selection:text-white">
+    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${outfit.variable} h-full`}>
+      <body className="min-h-full flex flex-col bg-slate-50 text-slate-900 dark:bg-gray-950 dark:text-gray-100 font-sans antialiased selection:bg-purple-600 selection:text-white transition-colors duration-200">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={true}>
           <ScrollProgress />
           <Navbar />
