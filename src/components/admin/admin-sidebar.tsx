@@ -78,7 +78,13 @@ export function AdminSidebar() {
             <span className="text-[10px] text-gray-500">admin@forgeui.dev</span>
           </div>
         </div>
-        <button className="w-full flex items-center justify-center gap-2 p-2 rounded-xl bg-gray-900 border border-gray-800 text-gray-400 text-xs hover:text-red-400 hover:border-red-800/50 transition-colors cursor-pointer">
+        <button
+          onClick={async () => {
+            await fetch("/api/admin/logout", { method: "POST" });
+            window.location.href = "/admin/login";
+          }}
+          className="w-full flex items-center justify-center gap-2 p-2 rounded-xl bg-gray-900 border border-gray-800 text-gray-400 text-xs hover:text-red-400 hover:border-red-800/50 transition-colors cursor-pointer"
+        >
           <LogOut className="w-3.5 h-3.5" />
           <span>Sign Out</span>
         </button>
