@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/shared/theme-provider";
 import { Navbar } from "@/components/shared/navbar";
 import { Footer } from "@/components/shared/footer";
 import { ScrollProgress } from "@/components/shared/scroll-progress";
+import { AppSidebar } from "@/components/shared/app-sidebar";
 
 const inter = Inter({
   variable: "--font-sans",
@@ -56,12 +57,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning className={`${inter.variable} ${outfit.variable} h-full`}>
-      <body className="min-h-full flex flex-col bg-slate-50 text-slate-900 dark:bg-gray-950 dark:text-gray-100 font-sans antialiased selection:bg-purple-600 selection:text-white transition-colors duration-200">
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={true}>
+      <body className="min-h-full flex flex-col bg-slate-50 text-slate-900 dark:bg-gray-950 dark:text-gray-100 font-sans antialiased selection:bg-purple-600/20 selection:text-purple-900 transition-colors duration-200 white-glass-bg">
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={true}>
           <ScrollProgress />
           <Navbar />
-          <main className="flex-1 flex flex-col">{children}</main>
-          <Footer />
+          <div className="flex flex-1">
+            <AppSidebar />
+            <div className="flex-1 flex flex-col min-w-0">
+              <main className="flex-1 flex flex-col">{children}</main>
+              <Footer />
+            </div>
+          </div>
         </ThemeProvider>
       </body>
     </html>

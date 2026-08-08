@@ -58,7 +58,7 @@ export default function ComponentDetailPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-950 text-gray-100 py-10 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-slate-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 py-10 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-8">
         {/* Left Navigation Sidebar matching requested sub-menu */}
         <ComponentSidebar />
@@ -68,7 +68,7 @@ export default function ComponentDetailPage() {
         {/* Top Breadcrumb */}
         <Link
           href="/components"
-          className="inline-flex items-center gap-2 text-xs font-semibold text-gray-400 hover:text-purple-400 transition-colors"
+          className="inline-flex items-center gap-2 text-xs font-semibold text-gray-500 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
           <span>Back to Component Library</span>
@@ -77,32 +77,32 @@ export default function ComponentDetailPage() {
         {/* Title Header */}
         <div className="space-y-3">
           <div className="flex items-center gap-3">
-            <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-purple-950 text-purple-300 border border-purple-800/50 uppercase">
+            <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-purple-100 dark:bg-purple-950 text-purple-600 dark:text-purple-300 border border-purple-200 dark:border-purple-800/50 uppercase">
               {component.category}
             </span>
             <span className="text-xs text-gray-500 font-mono flex items-center gap-1">
-              <Sparkles className="w-3.5 h-3.5 text-cyan-400" /> React 19 + TypeScript
+              <Sparkles className="w-3.5 h-3.5 text-cyan-500 dark:text-cyan-400" /> React 19 + TypeScript
             </span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-white font-heading">
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white font-heading">
             {component.name}
           </h1>
-          <p className="text-gray-400 text-sm max-w-2xl leading-relaxed">
+          <p className="text-gray-500 dark:text-gray-400 text-sm max-w-2xl leading-relaxed">
             {component.description}
           </p>
         </div>
 
         {/* CLI Install Bar */}
-        <div className="p-4 rounded-2xl bg-gray-900 border border-gray-800 flex items-center justify-between gap-4 font-mono text-xs shadow-inner">
+        <div className="p-4 rounded-2xl bg-gray-100 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 flex items-center justify-between gap-4 font-mono text-xs shadow-inner">
           <div className="flex items-center gap-3">
-            <Terminal className="w-4 h-4 text-purple-400" />
-            <span className="text-gray-500">$</span>
-            <span className="text-purple-300 font-semibold">{component.installCmd}</span>
+            <Terminal className="w-4 h-4 text-purple-500 dark:text-purple-400" />
+            <span className="text-gray-400 dark:text-gray-500">$</span>
+            <span className="text-purple-600 dark:text-purple-300 font-semibold">{component.installCmd}</span>
           </div>
           <button
             onClick={handleCopyCli}
-            className="px-3 py-1.5 rounded-xl bg-gray-800 hover:bg-gray-700 text-gray-300 transition-all flex items-center gap-1.5 cursor-pointer"
+            className="px-3 py-1.5 rounded-xl bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 transition-all flex items-center gap-1.5 cursor-pointer"
           >
             {copiedCli ? <Check className="w-3.5 h-3.5 text-green-400" /> : <Copy className="w-3.5 h-3.5" />}
             <span>{copiedCli ? "Copied" : "Copy CLI"}</span>
@@ -110,9 +110,9 @@ export default function ComponentDetailPage() {
         </div>
 
         {/* Component Interactive Sandbox Box */}
-        <div className="rounded-2xl border border-gray-800 bg-gray-900 shadow-2xl overflow-hidden">
+        <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-2xl overflow-hidden">
           {/* Header Controls */}
-          <div className="p-4 border-b border-gray-800 bg-gray-950 flex flex-wrap items-center justify-between gap-4">
+          <div className="p-4 border-b border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-950 flex flex-wrap items-center justify-between gap-4">
             {/* Variant selector */}
             <div className="flex items-center gap-2">
               <span className="text-xs font-mono text-gray-500 mr-1">Variant:</span>
@@ -121,7 +121,7 @@ export default function ComponentDetailPage() {
                   key={v}
                   onClick={() => setSelectedVariant(v)}
                   className={`text-xs font-mono px-2.5 py-1 rounded-lg capitalize transition-all cursor-pointer ${
-                    selectedVariant === v ? "bg-purple-600 text-white font-bold" : "bg-gray-850 text-gray-400 hover:text-white"
+                    selectedVariant === v ? "bg-purple-600 text-white font-bold" : "bg-gray-200 dark:bg-gray-850 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
                   }`}
                 >
                   {v}
@@ -134,7 +134,7 @@ export default function ComponentDetailPage() {
               <button
                 onClick={() => setActiveTab("preview")}
                 className={`px-3 py-1.5 rounded-xl text-xs font-semibold cursor-pointer ${
-                  activeTab === "preview" ? "bg-gray-800 text-purple-300 border border-purple-500/40" : "text-gray-400 hover:text-white"
+                  activeTab === "preview" ? "bg-purple-100 dark:bg-gray-800 text-purple-600 dark:text-purple-300 border border-purple-300 dark:border-purple-500/40" : "text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
                 }`}
               >
                 <Eye className="w-3.5 h-3.5 inline mr-1" /> Preview
@@ -142,7 +142,7 @@ export default function ComponentDetailPage() {
               <button
                 onClick={() => setActiveTab("code")}
                 className={`px-3 py-1.5 rounded-xl text-xs font-semibold cursor-pointer ${
-                  activeTab === "code" ? "bg-gray-800 text-purple-300 border border-purple-500/40" : "text-gray-400 hover:text-white"
+                  activeTab === "code" ? "bg-purple-100 dark:bg-gray-800 text-purple-600 dark:text-purple-300 border border-purple-300 dark:border-purple-500/40" : "text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
                 }`}
               >
                 <Code2 className="w-3.5 h-3.5 inline mr-1" /> Code
@@ -150,7 +150,7 @@ export default function ComponentDetailPage() {
 
               <button
                 onClick={handleCopyCode}
-                className="px-3 py-1.5 rounded-xl bg-purple-950/60 border border-purple-800/60 text-purple-200 text-xs hover:bg-purple-900/60 transition-all flex items-center gap-1.5 cursor-pointer"
+                className="px-3 py-1.5 rounded-xl bg-purple-100 dark:bg-purple-950/60 border border-purple-200 dark:border-purple-800/60 text-purple-600 dark:text-purple-200 text-xs hover:bg-purple-200 dark:hover:bg-purple-900/60 transition-all flex items-center gap-1.5 cursor-pointer"
               >
                 {copiedCode ? <Check className="w-3.5 h-3.5 text-green-400" /> : <Copy className="w-3.5 h-3.5 text-purple-400" />}
                 <span>{copiedCode ? "Copied" : "Copy Code"}</span>
@@ -159,7 +159,7 @@ export default function ComponentDetailPage() {
           </div>
 
           {/* Interactive Rendering Area */}
-          <div className="p-10 min-h-[300px] flex items-center justify-center bg-gray-950/60">
+          <div className="p-10 min-h-[300px] flex items-center justify-center bg-gray-50 dark:bg-gray-950/60">
             {activeTab === "preview" ? (
               <div className="w-full max-w-md flex flex-col items-center justify-center text-center">
                 {slug === "button" && (
@@ -495,24 +495,24 @@ export default function ComponentDetailPage() {
 
         {/* Props Documentation Table */}
         <div className="space-y-4">
-          <h3 className="text-lg font-bold text-white font-heading">Props API</h3>
-          <div className="rounded-2xl border border-gray-800 bg-gray-900 overflow-hidden">
+          <h3 className="text-lg font-bold text-gray-900 dark:text-white font-heading">Props API</h3>
+          <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 overflow-hidden">
             <table className="w-full text-left border-collapse text-xs">
               <thead>
-                <tr className="border-b border-gray-800 bg-gray-950 text-purple-400 font-mono">
+                <tr className="border-b border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-950 text-purple-600 dark:text-purple-400 font-mono">
                   <th className="py-3 px-4">Prop</th>
                   <th className="py-3 px-4">Type</th>
                   <th className="py-3 px-4">Default</th>
                   <th className="py-3 px-4">Description</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-800/80 text-gray-300">
+              <tbody className="divide-y divide-gray-100 dark:divide-gray-800/80 text-gray-600 dark:text-gray-300">
                 {component.props.map((p) => (
-                  <tr key={p.name} className="hover:bg-gray-850/50">
-                    <td className="py-3 px-4 font-mono font-bold text-white">{p.name}</td>
-                    <td className="py-3 px-4 font-mono text-purple-300">{p.type}</td>
+                  <tr key={p.name} className="hover:bg-gray-50 dark:hover:bg-gray-850/50">
+                    <td className="py-3 px-4 font-mono font-bold text-gray-900 dark:text-white">{p.name}</td>
+                    <td className="py-3 px-4 font-mono text-purple-600 dark:text-purple-300">{p.type}</td>
                     <td className="py-3 px-4 font-mono text-gray-400">{p.default}</td>
-                    <td className="py-3 px-4 text-gray-400">{p.description}</td>
+                    <td className="py-3 px-4 text-gray-500 dark:text-gray-400">{p.description}</td>
                   </tr>
                 ))}
               </tbody>
@@ -521,11 +521,11 @@ export default function ComponentDetailPage() {
         </div>
 
         {/* Accessibility Notes Box */}
-        <div className="p-5 rounded-2xl bg-purple-950/30 border border-purple-800/40 space-y-2">
-          <h4 className="text-xs font-bold text-purple-300 uppercase tracking-wider flex items-center gap-2">
-            <Shield className="w-4 h-4 text-purple-400" /> Accessibility Standards
+        <div className="p-5 rounded-2xl bg-purple-50 dark:bg-purple-950/30 border border-purple-200 dark:border-purple-800/40 space-y-2">
+          <h4 className="text-xs font-bold text-purple-700 dark:text-purple-300 uppercase tracking-wider flex items-center gap-2">
+            <Shield className="w-4 h-4 text-purple-500 dark:text-purple-400" /> Accessibility Standards
           </h4>
-          <p className="text-xs text-gray-300 leading-relaxed">
+          <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed">
             {component.accessibility}
           </p>
         </div>

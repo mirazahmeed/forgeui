@@ -2,8 +2,22 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { Zap, Layers, Navigation, MessageSquare, FileText, Layout, Smartphone, Database, ShoppingBag, Shield } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
+import {
+  Zap,
+  Layers,
+  Navigation,
+  MessageSquare,
+  FileText,
+  Layout,
+  Smartphone,
+  Database,
+  ShoppingBag,
+  Shield,
+  Search,
+  ChevronLeft,
+  Command,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 import { COMPONENT_REGISTRY } from "@/lib/registry";
 
@@ -178,67 +192,183 @@ const TAXONOMY_GROUPS: {
 
 export function ComponentSidebar() {
   const pathname = usePathname();
+  const router = useRouter();
+  const [searchQuery, setSearchQuery] = React.useState("");
+  const inputRef = React.useRef<HTMLInputElement>(null);
+
+  // Keyboard shortcut ⌘K to focus search
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+        e.preventDefault();
+        inputRef.current?.focus();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
+  // Flatten all items for search filtering
+  const allItems = React.useMemo(() => {
+    return TAXONOMY_GROUPS.flatMap((group) => {
+      const items = COMPONENT_REGISTRY.filter((c) =>
+        group.registryCategories.includes(c.category)
+      ).sort((a, b) => a.name.localeCompare(b.name));
+
+      return items.map((item) => {
+        const override = group.overrides?.[item.slug];
+        return {
+          slug: item.slug,
+          category: item.category,
+          label: override?.label || item.name,
+          badge: override?.badge,
+          groupTitle: group.title,
+          groupIcon: group.icon,
+          href: `/components/${item.category}/${item.slug}`,
+        };
+      });
+    });
+  }, []);
+
+  // Filter items by search query
+  const filteredGroups = React.useMemo(() => {
+    if (!searchQuery.trim()) return null; // null = show normal grouped view
+
+    const q = searchQuery.toLowerCase();
+    return allItems.filter(
+      (item) =>
+        item.label.toLowerCase().includes(q) ||
+        item.slug.toLowerCase().includes(q) ||
+        item.groupTitle.toLowerCase().includes(q)
+    );
+  }, [searchQuery, allItems]);
 
   return (
-    <aside className="w-full lg:w-56 shrink-0 space-y-6 lg:sticky lg:top-20 lg:max-h-[calc(100vh-6rem)] lg:overflow-y-auto pr-3 py-2 select-none font-sans">
-      <div className="px-3 text-xs font-bold text-gray-500 uppercase tracking-wider pb-2 border-b border-gray-200 dark:border-gray-800/80">
-        Components
+    <aside className="sidebar-daisy hidden lg:block w-60 shrink-0 sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto select-none font-sans">
+      {/* ── Search Bar ── */}
+      <div className="sidebar-search-bar">
+        <div className="sidebar-search-wrapper">
+          <Search className="sidebar-search-icon" />
+          <input
+            ref={inputRef}
+            type="text"
+            placeholder="Search..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="sidebar-search-input"
+          />
+          <div className="sidebar-search-kbd">
+            <kbd>⌘</kbd>
+            <kbd>K</kbd>
+          </div>
+        </div>
       </div>
 
-      {TAXONOMY_GROUPS.map((group) => {
-        // Pull components from registry that belong to this group's categories
-        const items = COMPONENT_REGISTRY.filter((c) =>
-          group.registryCategories.includes(c.category)
-        ).sort((a, b) => a.name.localeCompare(b.name));
+      {/* ── Back link ── */}
+      <Link href="/components" className="sidebar-back-link">
+        <ChevronLeft className="w-4 h-4" />
+        <span>Back</span>
+      </Link>
 
-        if (items.length === 0) return null;
+      {/* ── Divider ── */}
+      <div className="sidebar-divider" />
 
-        const CategoryIcon = group.icon;
-        return (
-          <div key={group.title} className="space-y-1.5">
-            <div className="flex items-center gap-2 px-3 py-1 text-xs font-semibold text-gray-500 dark:text-gray-400">
-              <CategoryIcon className="w-3.5 h-3.5 text-gray-400 dark:text-gray-500 shrink-0" />
-              <span>{group.title}</span>
-            </div>
+      {/* ── Search Results ── */}
+      {filteredGroups !== null ? (
+        <div className="sidebar-search-results">
+          {filteredGroups.length === 0 ? (
+            <p className="sidebar-no-results">
+              No components matching &quot;{searchQuery}&quot;
+            </p>
+          ) : (
+            filteredGroups.map((item) => {
+              const isActive =
+                pathname === item.href || pathname.endsWith(`/${item.slug}`);
+              return (
+                <Link
+                  key={`${item.groupTitle}-${item.slug}`}
+                  href={item.href}
+                  className={cn(
+                    "sidebar-item",
+                    isActive && "sidebar-item-active"
+                  )}
+                >
+                  <span>{item.label}</span>
+                  {item.badge && (
+                    <span
+                      className={cn(
+                        "sidebar-badge",
+                        item.badge === "new" && "sidebar-badge-new",
+                        item.badge === "updated" && "sidebar-badge-updated"
+                      )}
+                    >
+                      {item.badge}
+                    </span>
+                  )}
+                </Link>
+              );
+            })
+          )}
+        </div>
+      ) : (
+        /* ── Grouped Component List ── */
+        <div className="sidebar-groups">
+          {TAXONOMY_GROUPS.map((group) => {
+            const items = COMPONENT_REGISTRY.filter((c) =>
+              group.registryCategories.includes(c.category)
+            ).sort((a, b) => a.name.localeCompare(b.name));
 
-            <div className="space-y-0.5 pl-2">
-              {items.map((item) => {
-                const override = group.overrides?.[item.slug];
-                const label = override?.label || item.name;
-                const badge = override?.badge;
-                // Use the component's actual registry category for the URL
-                const href = `/components/${item.category}/${item.slug}`;
-                const isActive = pathname === href || pathname.endsWith(`/${item.slug}`);
+            if (items.length === 0) return null;
 
-                return (
-                  <Link
-                    key={item.slug}
-                    href={href}
-                    className={cn(
-                      "flex items-center justify-between px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-150 cursor-pointer",
-                      isActive
-                        ? "bg-purple-600 text-white font-bold shadow-md dark:bg-purple-950/80 dark:text-purple-300 dark:ring-1 dark:ring-purple-800/50"
-                        : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-900/60"
-                    )}
-                  >
-                    <span>{label}</span>
-                    {badge && (
-                      <span className={cn(
-                        "text-[9px] font-mono px-1.5 py-0.5 rounded font-normal",
-                        isActive
-                          ? "bg-purple-700 dark:bg-purple-900 text-purple-100"
-                          : "bg-gray-200 dark:bg-gray-800 text-gray-600 dark:text-gray-400"
-                      )}>
-                        {badge}
-                      </span>
-                    )}
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
-        );
-      })}
+            const CategoryIcon = group.icon;
+            return (
+              <div key={group.title} className="sidebar-group">
+                {/* Category Header */}
+                <div className="sidebar-group-header">
+                  <CategoryIcon className="sidebar-group-icon" />
+                  <span>{group.title}</span>
+                </div>
+
+                {/* Component Items */}
+                <div className="sidebar-group-items">
+                  {items.map((item) => {
+                    const override = group.overrides?.[item.slug];
+                    const label = override?.label || item.name;
+                    const badge = override?.badge;
+                    const href = `/components/${item.category}/${item.slug}`;
+                    const isActive =
+                      pathname === href || pathname.endsWith(`/${item.slug}`);
+
+                    return (
+                      <Link
+                        key={item.slug}
+                        href={href}
+                        className={cn(
+                          "sidebar-item",
+                          isActive && "sidebar-item-active"
+                        )}
+                      >
+                        <span>{label}</span>
+                        {badge && (
+                          <span
+                            className={cn(
+                              "sidebar-badge",
+                              badge === "new" && "sidebar-badge-new",
+                              badge === "updated" && "sidebar-badge-updated"
+                            )}
+                          >
+                            {badge}
+                          </span>
+                        )}
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
     </aside>
   );
 }

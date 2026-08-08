@@ -47,20 +47,20 @@ export function StatsBar() {
   ];
 
   const colorMap: Record<string, { icon: string; glow: string; badge: string }> = {
-    purple: { icon: "text-purple-400 bg-purple-500/15", glow: "group-hover:shadow-purple-500/10", badge: "bg-purple-950/60 text-purple-300 border-purple-800/40" },
-    cyan: { icon: "text-cyan-400 bg-cyan-500/15", glow: "group-hover:shadow-cyan-500/10", badge: "bg-cyan-950/60 text-cyan-300 border-cyan-800/40" },
-    fuchsia: { icon: "text-fuchsia-400 bg-fuchsia-500/15", glow: "group-hover:shadow-fuchsia-500/10", badge: "bg-fuchsia-950/60 text-fuchsia-300 border-fuchsia-800/40" },
-    emerald: { icon: "text-emerald-400 bg-emerald-500/15", glow: "group-hover:shadow-emerald-500/10", badge: "bg-emerald-950/60 text-emerald-300 border-emerald-800/40" },
+    purple: { icon: "text-purple-600 bg-purple-100", glow: "group-hover:shadow-purple-500/8", badge: "bg-purple-50 text-purple-600 border-purple-200/60" },
+    cyan: { icon: "text-cyan-600 bg-cyan-100", glow: "group-hover:shadow-cyan-500/8", badge: "bg-cyan-50 text-cyan-600 border-cyan-200/60" },
+    fuchsia: { icon: "text-fuchsia-600 bg-fuchsia-100", glow: "group-hover:shadow-fuchsia-500/8", badge: "bg-fuchsia-50 text-fuchsia-600 border-fuchsia-200/60" },
+    emerald: { icon: "text-emerald-600 bg-emerald-100", glow: "group-hover:shadow-emerald-500/8", badge: "bg-emerald-50 text-emerald-600 border-emerald-200/60" },
   };
 
   return (
     <section className="py-20 relative">
-      <div className="absolute inset-0 bg-gray-950" />
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-800/60 to-transparent" />
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-800/60 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-b from-white via-gray-50/30 to-white" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-200/60 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-200/60 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 perspective-1200">
           {stats.map((stat, idx) => {
             const Icon = stat.icon;
             const colors = colorMap[stat.color];
@@ -71,16 +71,16 @@ export function StatsBar() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className={`group p-7 rounded-2xl bg-gray-900/40 border border-gray-800/80 text-center hover:border-gray-700/80 transition-all duration-500 hover:-translate-y-1 ${colors.glow} hover:shadow-xl`}
+                className={`group p-7 rounded-2xl glass-card text-center hover:border-gray-300/60 transition-all duration-500 hover:-translate-y-1.5 ${colors.glow} shadow-3d-hover`}
               >
                 <div className={`w-12 h-12 mx-auto mb-4 rounded-xl ${colors.icon} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
                   <Icon className="w-5 h-5" />
                 </div>
-                <div className="text-4xl sm:text-5xl font-extrabold text-white font-heading tracking-tight mb-1.5">
+                <div className="text-4xl sm:text-5xl font-extrabold text-gray-900 font-heading tracking-tight mb-1.5">
                   <AnimatedCounter value={stat.value} suffix={stat.suffix} />
                 </div>
-                <div className="text-sm font-semibold text-gray-200 mb-1">{stat.label}</div>
-                <div className="text-xs text-gray-500">{stat.description}</div>
+                <div className="text-sm font-semibold text-gray-700 mb-1">{stat.label}</div>
+                <div className="text-xs text-gray-400">{stat.description}</div>
               </motion.div>
             );
           })}

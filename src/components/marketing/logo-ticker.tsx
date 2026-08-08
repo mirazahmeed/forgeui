@@ -104,28 +104,28 @@ const logos = [
 
 export function LogoTicker() {
   return (
-    <section className="py-16 border-y border-gray-800/40 bg-gray-950/60 relative overflow-hidden">
-      {/* Subtle top glow line */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-gradient-to-r from-transparent via-purple-500/50 to-transparent" />
-      
+    <section className="py-16 relative overflow-hidden">
+      {/* Subtle glass dividers */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-px bg-gradient-to-r from-transparent via-purple-300/30 to-transparent" />
+
       <div className="max-w-7xl mx-auto px-4 text-center mb-10">
-        <p className="text-xs font-bold uppercase tracking-[0.25em] text-gray-500">
+        <p className="text-xs font-bold uppercase tracking-[0.25em] text-gray-400">
           Seamlessly integrates with your favorite tools
         </p>
       </div>
 
-      {/* Logo Grid — inspired by reference image */}
+      {/* Logo Grid — white glass style */}
       <div className="max-w-5xl mx-auto px-4">
         <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3">
           {logos.map((logo, idx) => (
             <div
               key={idx}
-              className="group flex flex-col items-center justify-center gap-2.5 py-5 px-3 rounded-2xl bg-gray-900/40 border border-gray-800/60 hover:border-purple-500/40 hover:bg-gray-900/80 transition-all duration-300 cursor-default"
+              className="group flex flex-col items-center justify-center gap-2.5 py-5 px-3 rounded-2xl bg-white/50 border border-gray-200/60 hover:border-purple-300/60 hover:bg-white/80 transition-all duration-300 cursor-default backdrop-blur-sm shadow-sm hover:shadow-md hover:shadow-purple-500/5 hover:-translate-y-0.5"
             >
-              <div className="text-gray-500 group-hover:text-purple-300 transition-colors duration-300">
+              <div className="text-gray-400 group-hover:text-purple-500 transition-colors duration-300">
                 {logo.svg}
               </div>
-              <span className="text-[11px] font-semibold text-gray-500 group-hover:text-gray-200 transition-colors duration-300 tracking-wide">
+              <span className="text-[11px] font-semibold text-gray-400 group-hover:text-gray-700 transition-colors duration-300 tracking-wide">
                 {logo.name}
               </span>
             </div>
@@ -133,8 +133,8 @@ export function LogoTicker() {
         </div>
       </div>
 
-      {/* Bottom glow line */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent" />
+      {/* Bottom divider */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-2/3 h-px bg-gradient-to-r from-transparent via-cyan-300/20 to-transparent" />
     </section>
   );
 }

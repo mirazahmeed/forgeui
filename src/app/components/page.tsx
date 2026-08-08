@@ -5,7 +5,6 @@ import Link from "next/link";
 import { COMPONENT_REGISTRY, ComponentItem } from "@/lib/registry";
 import { Search, Layers, Layout, Navigation, MessageSquare, Database, ShoppingBag, FileText, Shield, ArrowRight, Sparkles, Terminal, Zap, Smartphone } from "lucide-react";
 
-import { ComponentSidebar } from "@/components/shared/component-sidebar";
 
 export default function ComponentBrowserPage() {
   const [searchQuery, setSearchQuery] = React.useState("");
@@ -18,7 +17,7 @@ export default function ComponentBrowserPage() {
   });
 
   return (
-    <div className="min-h-screen bg-gray-950 text-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-slate-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto space-y-10">
         {/* Header */}
         <div className="space-y-4 text-center sm:text-left border-b border-gray-800 pb-8">
@@ -52,13 +51,9 @@ export default function ComponentBrowserPage() {
           </div>
         </div>
 
-        {/* Layout Grid */}
-        <div className="flex flex-col lg:flex-row gap-8">
-          {/* Left Category & Component List Sidebar */}
-          <ComponentSidebar />
-
-          {/* Component Grid */}
-          <main className="flex-1">
+        {/* Component Grid */}
+        <div>
+          <main>
             {filteredComponents.length === 0 ? (
               <div className="p-12 text-center bg-gray-900/40 rounded-2xl border border-gray-800 space-y-3">
                 <p className="text-gray-400 text-sm">No components matching &quot;{searchQuery}&quot;</p>
